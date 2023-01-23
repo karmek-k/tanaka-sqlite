@@ -30,11 +30,15 @@ def main(argv: list[str]) -> None:
         log('Please specify the resulting database\'s filename as the second argument')
         exit(1)
 
+    log('Connecting to SQLite')
     dbFilename = argv[1]
     db = sqlite3.connect(dbFilename)
+    cursor = db.cursor()
 
-    log('Connected to SQLite')
+    log('Executing initial SQL')
+    cursor.execute(INITIAL_SQL)
 
+    cursor.close()
     db.close()
     
 
