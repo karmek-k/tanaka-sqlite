@@ -39,7 +39,7 @@ class SentenceParser:
         english = ''.join(parsed['english'])
         
         # id as an int, without the underscore
-        id = int(filter(lambda c: c.isdigit(), parsed['id']))
+        id = int(''.join(filter(lambda c: c.isdigit(), parsed['id'])))
 
         return Sentence(id, japanese, english)
     
@@ -57,6 +57,9 @@ class SentenceParser:
             # TODO: extract somewhere else
             if char == '\t':
                 mode = self.ParsingMode.ENGLISH
+                shouldSave = False
+            elif char == '#':
+                mode = self.ParsingMode.PASS_ID
                 shouldSave = False
             elif mode == self.ParsingMode.PASS_ID:
                 if char == '=':
