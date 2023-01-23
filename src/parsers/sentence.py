@@ -1,6 +1,6 @@
 from enum import Enum
 
-from .entities import Sentence
+from ..entities import Sentence
 
 
 class SentenceParser:
